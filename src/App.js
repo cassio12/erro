@@ -14,7 +14,13 @@ class App extends React.Component {
 
   next = () => {
     this.setState({
-      page: <Cotacoes/>
+      page: <Cotacoes page={()=>this.back()}/>
+    })
+  }
+
+  back = () => {
+    this.setState({
+      page: <Form state={()=>this.next()}/>
     })
   }
  

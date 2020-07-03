@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../App.css';
 import Logo from '../img/logoE.jpeg'
-import api from '../service/api'
+import sendList from '../service/api'
 
 
 class Form extends React.Component {
@@ -22,15 +22,16 @@ class Form extends React.Component {
   }
 
   postApi = async(data) => {
-    // console.log('oiio')
     try{
-      const response = await api.post(
-        'save',data,{headers:{'Content-Type': 'application/json'}}
+      // console.log("ioio")
+      const response = await sendList.post(
+        'https://o7esg0iq8i.execute-api.us-east-1.amazonaws.com/prod/save',data,{headers:{'Content-Type': 'application/json'}}
       )
       if (response.status === 204){
         this.setState({
           returnMessage: 'Solicitação enviada com sucesso!'
         })
+        // console.log("llolo")
         setTimeout(
           function(){
             this.setState({
@@ -85,9 +86,9 @@ class Form extends React.Component {
           <img className="header-logo" src={Logo}></img>
           <h1>MVP Cotação-e</h1>
         </header>
+        <p className="arrowNext" onClick={this.props.state}>Cotações Solicitadas &#10145;</p>
         <form className="App-form" onSubmit={(e) => this.sevedData(e)}>
           <h2 className="form-tilte">Diga ao fornecedor o que você precisa</h2>
-          <p onClick={this.props.state}>seta</p>
           <div className="form-container_infoForm">
             <div className="container_infoForm-inputBoxs">
               <label>Nome do produto<span>*</span></label>
